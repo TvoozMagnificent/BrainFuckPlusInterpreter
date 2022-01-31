@@ -70,9 +70,12 @@ if True:
                     #
                     print(f'{_warn}{_return}Executing: {digit}',end=_return)
                 location=f'cells{"".join(([f"[{i}]" for i in cursor]))}'
-                if   digit=='q':
+                if   digit=='Q':
                     print(f'{_warn}{_return*2}Process finished by exit code \'q\'')
                     return _
+                elif digit=='q':
+                    # Equivalent: break
+                    return cells, cursor, copied, portals, functions
                 elif digit=='O':
                     value=eval(location)
                     if isinstance(value,int):
@@ -387,4 +390,4 @@ if True:
 
     def str2bfp(string):
         return bf2bfp(str2bf(string))
-# 390 lines!!!
+# 393 lines!!!
