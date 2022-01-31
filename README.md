@@ -9,16 +9,18 @@ https://en.wikipedia.org/wiki/Brainfuck
 
 (tl,dr;)
 
+You can run bf in this bf+ interpreter because we can translate bf to bf+. 
+
 ---
 
 #What is bf+? 
 Differences: infinite cells, lists in cells, negative cells, more loops, etc. 
 
-There are 32 key phrases in bf+. Because bf+ can do everything bf can, it is turing-complete: 
+There are 33 key phrases in bf+. Because bf+ can do everything bf can, it is turing-complete: 
 
-(There are also 32 key words, not including 22 cap letters except 'P', 'F', 'O', and 'I'). 
+(There are also 33 key words, not including 21 cap letters except 'P', 'F', 'O', 'Q', and 'I'). 
 
-32+22=54
+33+21=54
 
 bf | bf+
 ---|---
@@ -98,6 +100,8 @@ FN                      :      call function named 'N'; if function undefined ra
 
 initial loop comment.   :      supported: [], {}, <>, [l], {l}, \<l\>, but make sure pairing symbols pair|Comment|Sort of, as only [l] is supported in bf
 
-q                       :      quit entire program
+q                       :      quit function
 
-# 103 lines!!! GOD!!! 
+Q                       :      quit entire program
+
+# 107 lines!!! GOD!!! 
