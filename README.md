@@ -16,11 +16,11 @@ You can run bf in this bf+ interpreter because we can translate bf to bf+.
 #What is bf+? 
 Differences: infinite cells, lists in cells, negative cells, more loops, etc. 
 
-There are 33 key phrases in bf+. Because bf+ can do everything bf can, it is turing-complete: 
+There are 37 key phrases in bf+. Because bf+ can do everything bf can, it is turing-complete: 
 
-(There are also 33 key words, not including 21 cap letters except 'P', 'F', 'O', 'Q', and 'I'). 
+(There are also 37 key words, not including 21 cap letters except 'P', 'F', 'O', 'Q', and 'I'). 
 
-33+21=54
+37+21=58
 
 bf | bf+
 ---|---
@@ -84,6 +84,8 @@ FN                      :      call function named 'N'; if function undefined ra
 
 \.CODE\:                :      execute code inside if current cell is <=0|Loop|Yes, as goes all the loop features except \[CODEl\]
 
+\/CODE\\                :      execute code inside|Loop|Yes, as goes all the loop features except \[CODEl\]
+
 \(CODEl\)               :      repeatly execute code inside as long as current cell remains 0 (position of 'current cell' aforementioned might change due to CODE inside) (code doesn't include character 'l', the letter in jk'l'mn)|Loop|Yes, as goes all the loop features except \[CODEl\]
 
 \[CODEl\]               :      repeatly execute code inside as long as current cell remains not 0 (position of 'current cell' aforementioned might change due to CODE inside) (code doesn't include character 'l', the letter in jk'l'mn)|Loop|No, it is the only loop in bf: the [] loop
@@ -96,6 +98,8 @@ FN                      :      call function named 'N'; if function undefined ra
 
 \.CODEl\:               :      repeatly execute code inside as long as current cell remains <=0 (position of 'current cell' aforementioned might change due to CODE inside) (code doesn't include character 'l', the letter in jk'l'mn)|Loop|Yes, as goes all the loop features except \[CODEl\]
 
+\/CODEl\\               :      repeatly execute code inside (code doesn't include character 'l', the letter in jk'l'mn)|Loop|Yes, as goes all the loop features except \[CODEl\]
+
 \#CODE\#                :      ignore code inside, used for commenting. make sure pairing symbols pair. DO NOT STACK THIS|Comment|Yes, as it is not needed in bf
 
 initial loop comment.   :      supported: [], {}, <>, [l], {l}, \<l\>, but make sure pairing symbols pair|Comment|Sort of, as only [l] is supported in bf
@@ -104,4 +108,13 @@ q                       :      quit function
 
 Q                       :      quit entire program
 
-# 107 lines!!! GOD!!! 
+'                       :      print character \t
+
+"                       :      print character \n
+
+|                       :      break 2 loops
+
+_                       :      restart 2nd loop (but still checks condition before execution)
+
+# 119 lines!!! GOD!!! 
+
