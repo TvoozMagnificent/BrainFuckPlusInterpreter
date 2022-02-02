@@ -39,8 +39,8 @@ if True:
             return self.clean_code()
         def get_other_half(self,index):
             character = self.get_code()[index]
-            l1, l2 = '([{<,.',')]}>;:'
-            if character in ')]}>;:':
+            l1, l2 = '([{<,./',')]}>;:\\'
+            if character in l2:
                 search=self.get_code()[:index][::-1]
                 search_for = l1[l2.index(character)]
             else:
@@ -53,9 +53,33 @@ if True:
                 new_code=new_code[:i]+new_code[i:][1:][1:]
                 indexes_=indexes_[:i]+indexes_[i:][1:][1:]
             answer = indexes_[new_code.index(search_for)]
-            if character in ')]}>;:':
+            if character in l2:
                 return index - (answer+1)
             return answer+1+index
+        def get_loop_end(self,index):
+            search=self.get_code()
+            character = self.get_code()[index]
+            _____ = character
+            l1, l2 = '([{<,./', ')]}>;:\\'
+            new_code, indexes_ = filtered(search, l1+l2+character)
+            eliminates = [l1[i]+l2[i] for i in range(len(l1))]
+            _nc,_ind=copy(new_code),copy(indexes_)
+            _nc = _nc[:_ind.index(index)] + _nc[_ind.index(index)+1:]
+            _ind=_ind[:_ind.index(index)]+_ind[_ind.index(index) +1:]
+            while _____ in _nc:
+                _nc = _nc[:_nc.index(_____)] + _nc[_nc.index(_____) + 1:]
+                _ind = _ind[:_nc.index(_____)] + _ind[_nc.index(_____) + 1:]
+            for ind in indexes_:
+                if ind not in _ind+[index]:
+                    new_code = new_code[:indexes_.index(ind)] + new_code[indexes_.index(ind)+1:]
+                    indexes_ = indexes_[:indexes_.index(ind)] + indexes_[indexes_.index(ind)+1:]
+            while any([eliminate in new_code for eliminate in eliminates]):
+                for eliminate in eliminates:
+                    if eliminate in new_code:
+                        i = new_code.index(eliminate)
+                        new_code = new_code[:i] + new_code[i:][1:][1:]
+                        indexes_ = indexes_[:i] + indexes_[i:][1:][1:]
+            return indexes_[new_code.index(_____)+2]
         def execute(self, cells=[0], cursor=[0], copied=None, portals={}, functions={}, sace=True, scc=True):
             # sace  : Show Actual Commands Executed
             # scc   : Show Current Cells
@@ -76,6 +100,12 @@ if True:
                 elif digit=='q':
                     # Equivalent: break
                     return cells, cursor, copied, portals, functions
+                elif digit=='\'':
+                    #
+                    print('\t',end='')
+                elif digit=='"':
+                    #
+                    print('\n',end='')
                 elif digit=='O':
                     value=eval(location)
                     if isinstance(value,int):
@@ -291,14 +321,15 @@ if True:
                                           functions)
                     if cells=='ERR':
                         return _
-                elif digit in '([{<,.':
-                    dictionary = dict(zip(list('([{<,.'),[
+                elif digit in '([{<,./':
+                    dictionary = dict(zip(list('([{<,./'),[
                         lambda x:x==0,
                         lambda x:x!=0,
                         lambda x: x>0,
                         lambda x: x<0,
                         lambda x:x>=0,
                         lambda x:x<=0,
+                        lambda x:True,
                     ]))
                     if not dictionary[digit](eval(location)):
                         try:
@@ -323,6 +354,10 @@ if True:
                               f'ValueError: substring not found {_return}'
                               f'ERR nopair{digit}')
                         return _
+                elif digit=='|':
+                    pointer=self.get_loop_end(pointer)
+                elif digit=='_':
+                    pointer=self.get_other_half(self.get_loop_end(pointer))-1
                 pointer+=1
                 if scc:
                     #
@@ -390,4 +425,6 @@ if True:
 
     def str2bfp(string):
         return bf2bfp(str2bf(string))
-# 393 lines!!!
+
+# 427 lines!!!
+
